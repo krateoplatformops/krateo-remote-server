@@ -36,7 +36,7 @@ io.on('connection', (client) => {
     })
     client.join(data.nodeId)
 
-    logger.info(`> ${client.id} check_node`)
+    logger.info(`> ${client.id} check_node - ${data.nodeId}`)
 
     if (nodes.find((x) => x.nodeId === data.nodeId)) {
       io.to(client.id).emit('node_is_online', data)
@@ -57,7 +57,7 @@ io.on('connection', (client) => {
 
   /* Receive a task */
   client.on('task', (data) => {
-    logger.info(`> ${client.id} task`)
+    logger.info(`> ${client.id} task - ${data.nodeId}`)
 
     const nd = nodes.find((x) => x.nodeId === data.nodeId)
     if (nd) {
@@ -71,4 +71,4 @@ io.on('connection', (client) => {
   })
 })
 
-server.listen(8080)
+server.listen(process.env.PORT || 8080)

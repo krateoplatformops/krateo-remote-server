@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: krateo-remote-server
+  name: krateo-remote-server
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: krateo-remote-server
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: krateo-remote-server
+    spec:
+      containers:
+        - image: ghcr.io/krateoplatformops/krateo-remote-server:0.1.0
+          imagePullPolicy: IfNotPresent
+          name: krateo-remote-server
+          # livenessProbe:
+          #   httpGet:
+          #     path: /nginx_status
+          #     port: 8080
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 8080
+          resources:
+            limits:
+              memory: "32Mi"
+              cpu: "10m"

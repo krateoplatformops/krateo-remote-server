@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: krateo-remote-server
+spec:
+  ingressClassName: "kong"
+  rules:
+    - host: krateo-remote-server.krateo.site
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: krateo-remote-server
+                port:
+                  number: 80
