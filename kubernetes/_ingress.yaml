@@ -5,7 +5,7 @@ metadata:
 spec:
   ingressClassName: "kong"
   rules:
-    - host: krateo-remote-server.krateo.site
+    - host: krateo-remote-server.krateo.dev
       http:
         paths:
           - path: /

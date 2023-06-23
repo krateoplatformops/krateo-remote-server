@@ -21,7 +21,7 @@ spec:
         app: krateo-remote-server
     spec:
       containers:
-        - image: ghcr.io/krateoplatformops/krateo-remote-server:0.1.0
+        - image: app
           imagePullPolicy: IfNotPresent
           name: krateo-remote-server
           # livenessProbe:
