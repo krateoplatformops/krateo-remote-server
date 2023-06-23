@@ -4,7 +4,7 @@ metadata:
   name: cors-krateo-remote-server
 config:
   origins:
-    - "*"
+    - '*'
   credentials: true
   max_age: 3600
   preflight_continue: false
