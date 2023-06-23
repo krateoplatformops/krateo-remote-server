@@ -5,10 +5,15 @@ resources:
   - _deployment.yaml
   - _service.yaml
   - _ingress.yaml
+  - _cors-plugin.yaml
+  - _client-deployment.yaml
 
 namespace: remote
 
 images:
-  - name: app
+  - name: app-server
     newName: ghcr.io/krateoplatformops/krateo-remote-server
-    newTag: 0.1.1
+    newTag: 0.2.0
+  - name: app-client
+    newName: ghcr.io/krateoplatformops/krateo-remote-client
+    newTag: 0.2.0

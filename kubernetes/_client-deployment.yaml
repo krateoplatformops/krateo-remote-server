@@ -2,14 +2,14 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: krateo-remote-server
-  name: krateo-remote-server
+    app: krateo-remote-client
+  name: krateo-remote-client
 spec:
   replicas: 1
   revisionHistoryLimit: 0
   selector:
     matchLabels:
-      app: krateo-remote-server
+      app: krateo-remote-client
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -18,12 +18,17 @@ spec:
   template:
     metadata:
       labels:
-        app: krateo-remote-server
+        app: krateo-remote-client
     spec:
       containers:
-        - image: app-server
+        - image: app-client
           imagePullPolicy: IfNotPresent
-          name: krateo-remote-server
+          name: krateo-remote-client
+          env:
+            - name: NODE_ID
+              value: "crocodile"
+            - name: REMOTE_HOST
+              value: "http://krateo-remote-server.remote.svc"
           # livenessProbe:
           #   httpGet:
           #     path: /nginx_status
