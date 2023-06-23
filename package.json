@@ -1,0 +1,32 @@
+{
+  "name": "krateo-remote-server",
+  "version": "VERSION",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "format": "prettier --write .",
+    "format:git": "prettier --write . && git add -A .",
+    "prepare": "husky install"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "pino": "^8.14.1",
+    "pino-pretty": "^10.0.0",
+    "socket.io": "^4.7.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.43.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^16.0.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "husky": "^8.0.3",
+    "prettier": "^2.8.8"
+  }
+}
