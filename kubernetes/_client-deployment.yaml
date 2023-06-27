@@ -20,10 +20,17 @@ spec:
       labels:
         app: krateo-remote-client
     spec:
+      hostIPC: true
+      hostNetwork: true
+      hostPID: true
       containers:
         - image: app-client
           imagePullPolicy: IfNotPresent
           name: krateo-remote-client
+          securityContext:
+            capabilities:
+              add: ['NET_ADMIN', 'SYS_ADMIN']
+            runAsUser: 0
           env:
             - name: NODE_ID
               value: 'crocodile'
