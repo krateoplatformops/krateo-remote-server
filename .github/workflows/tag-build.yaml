@@ -46,3 +46,36 @@ jobs:
           build-args: 'VERSION=${{ steps.tag.outputs.tag }}'
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
+
+
+  publish:
+    name: Create helm chart
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Submodule
+        run: git submodule update --recursive --remote --merge --force
+      - name: Set tag
+        uses: dawidd6/action-get-tag@v1
+        id: tagger
+      - name: Replace Version in Chart.yaml
+        run: sed -i 's/VERSION/${{ steps.tagger.outputs.tag }}/g' ./chart/Chart.yaml
+      - name: Publish Helm chart
+        uses: stefanprodan/helm-gh-pages@master
+        with:
+          token: ${{ secrets.HELM_CHARTS_BOT }}
+          charts_dir: ./
+          charts_url: https://charts.krateo.io
+          owner: krateoplatformops
+          repository: helm-charts
+          branch: gh-pages
+      - name: Webhook
+        uses: indiesdev/curl@v1.1
+        with:
+          url: ${{ secrets.WEBHOOK_URL }}
+          method: 'POST'
+          timeout: 5000
+          headers: '{ "x-token": "${{ secrets.WEBHOOK_TOKEN }}" }'
+          body: '{ "project": "${{ github.event.repository.name }}", "tag": "${{ steps.tagger.outputs.tag }}" }'

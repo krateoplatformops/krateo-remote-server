@@ -1,0 +1,6 @@
+---
+{{ include "helm-chart-library.service" . }}
+---
+{{ include "helm-chart-library.deployment" . }}
+---
+{{ include "helm-chart-library.ingress" . }}
