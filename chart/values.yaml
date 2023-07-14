@@ -71,6 +71,10 @@ podEnv:
   - name: LOG_LEVEL
     value: info
 
+podEnvFrom:
+  - configMapRef:
+      name: jwt-secret-key
+
 ingress:
   enabled: true
   annotations:
