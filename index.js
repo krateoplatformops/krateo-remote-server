@@ -12,21 +12,21 @@ const jwt = require('jsonwebtoken');
 const nodes = []
 const clients = []
 
-io.use((socket, next) => {
-  const token = socket.handshake.auth.token;
-
-  // Verify and decode the JWT token
-  jwt.verify(token, process.env.JWT_SECRET_KEY, (error, decoded) => {
-    if (error) {
-      // Invalid token or verification error
-      return next(new Error('Authentication failed'));
-    }
-
-    // Authentication successful, attach the decoded token to the socket object
-    socket.decodedToken = decoded;
-    next();
-  });
-});
+// io.use((socket, next) => {
+//   const token = socket.handshake.auth.token;
+//
+//   // Verify and decode the JWT token
+//   jwt.verify(token, process.env.JWT_SECRET_KEY, (error, decoded) => {
+//     if (error) {
+//       // Invalid token or verification error
+//       return next(new Error('Authentication failed'));
+//     }
+//
+//     // Authentication successful, attach the decoded token to the socket object
+//     socket.decodedToken = decoded;
+//     next();
+//   });
+// });
 
 io.on('connection', (client) => {
   logger.info(`> ${client.id} connected`)
